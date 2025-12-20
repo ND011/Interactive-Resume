@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="Kawaii single-file music player with animated character and built-in calculator. Add local audio, import Spotify playlists, and use keyboard-friendly controls." />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Music Player + Anime Character + Calculator (Single Page)</title>
+  <style>
+    :root{
+      --bg1:#0f1724; --bg2:#0b1020; --glass: rgba(255,255,255,0.06);
+      --accent: #8be9fd; --accent2:#ff79c6;
+      --glass-border: rgba(255,255,255,0.08);
+      --card-radius: 16px;
+      /* fluid base font sizing for automatic scaling */
+      font-size: clamp(14px, 0.9vw + 12px, 18px);
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      color: #e6eef8;
+    }
+    html,body{height:100%;margin:0}
+    body{
+      background: radial-gradient(1200px 400px at 10% 10%, rgba(139,233,253,0.06), transparent 8%),
+                  radial-gradient(800px 300px at 90% 90%, rgba(255,121,198,0.04), transparent 8%),
+                  linear-gradient(180deg,var(--bg1),var(--bg2));
+      display:flex;align-items:center;justify-content:center;padding:40px;box-sizing:border-box;
+      -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+      overflow:auto;
+    }
+
+    /* Floating orbs */
+    .bg-orbs{position:fixed;inset:0;pointer-events:none;z-index:0}
+    .orb{position:absolute;border-radius:50%;filter:blur(40px);opacity:0.4}
+    .orb.o1{width:420px;height:420px;left:-10%;top:5%;background:linear-gradient(45deg,var(--accent),transparent)}
+    .orb.o2{width:320px;height:320px;right:-8%;bottom:0;background:linear-gradient(45deg,var(--accent2),transparent)}
+
+    .app{
+      z-index:1; max-width:980px; width:min(98%,980px); display:grid; grid-template-columns: minmax(220px,420px) 1fr; gap:1.5rem; align-items:start;
+      padding:calc(1.5rem + 10px);
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:var(--card-radius); padding:20px; box-sizing:border-box;
+      box-shadow: 0 6px 30px rgba(2,6,23,0.6); backdrop-filter: blur(8px) saturate(120%);
+      border: 1px solid var(--glass-border);
+    }
+
+    /* Left column: player + char */
+    .left{display:flex;flex-direction:column;gap:18px}
+
+    /* Anime character area */
+    .char-wrap{display:flex;gap:14px;align-items:center}
+    .char{
+      width:10rem;height:10rem;border-radius:50%;background:linear-gradient(180deg,#ffe7f9 0%, #ffd6e8 50%);
+      display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;box-shadow:inset 0 -6px 30px rgba(0,0,0,0.12);
+      transform-origin:center; animation: floaty 4s ease-in-out infinite;
+      border:1px solid rgba(255,255,255,0.12);
+    }
+    @keyframes floaty{ 0%{transform:translateY(0)}50%{transform:translateY(-10px) scale(1.02)}100%{transform:translateY(0)} }
+
+    /* simple kawaii face as inline SVG */
+  .char svg{width:7.5rem;height:7.5rem}
+
+    /* Player UI */
+    .player{display:flex;flex-direction:column;gap:12px}
+    .cover{
+      aspect-ratio: 16 / 9; min-height:10rem; border-radius:12px;background:linear-gradient(135deg, rgba(139,233,253,0.12), rgba(255,121,198,0.06));
+      display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem;color:var(--accent);
+      overflow:hidden;
+    }
+    .controls{display:flex;align-items:center;gap:12px}
+    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px 12px;border-radius:10px;color:inherit;cursor:pointer}
+    .btn.big{padding:14px;border-radius:50%;font-size:18px}
+
+    .progress{height:8px;background:linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));border-radius:6px;overflow:hidden}
+    .progress > i{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:6px}
+
+  .playlist{max-height:clamp(10rem, 30vh, 28rem);overflow:auto;padding-right:8px}
+
+  /* responsive embed wrapper for Spotify iframe */
+  .embed-wrap{position:relative;width:100%;padding-top:56.25%;margin-top:6px}
+  .embed-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    .track{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:8px;margin-bottom:6px}
+    .track.active{background:linear-gradient(90deg, rgba(139,233,253,0.06), rgba(255,121,198,0.03))}
+
+    /* Right column: calculator + details */
+    .right{display:flex;flex-direction:column;gap:18px}
+    .calc{padding:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px}
+    .display{background:rgba(0,0,0,0.18);padding:12px;border-radius:8px;font-size:20px;text-align:right}
+    .pad{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+    .key{padding:12px;background:rgba(255,255,255,0.03);text-align:center;border-radius:8px;cursor:pointer}
+
+    /* responsive */
+    @media (max-width:880px){ .app{grid-template-columns:1fr; } .char{margin:auto} }
+
+  /* keyboard focus visible styles (enabled when keyboard used) */
+  .kbd .btn:focus, .kbd .track:focus, .kbd .key:focus, .kbd input:focus, .kbd .playlist:focus{ outline: 3px solid rgba(139,233,253,0.18); outline-offset:3px; }
+
+  /* skip link */
+  .skip-link{position:absolute;left:12px;top:12px;background:#061022;color:var(--accent);padding:8px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.04);z-index:10;transform:translateY(-120%);transition:transform .18s}
+  .skip-link:focus{transform:translateY(0)}
+
+    footer{margin-top:18px;font-size:12px;opacity:0.7}
+  </style>
+</head>
+<body>
+  <a href="#cover" class="skip-link">Skip to player</a>
+  <div class="bg-orbs" aria-hidden>
+    <div class="orb o1"></div>
+    <div class="orb o2"></div>
+  </div>
+
+  <main class="app" role="main">
+    <section class="card left">
+      <div class="char-wrap">
+        <div class="char" title="anime character" role="img" aria-label="Cute anime character">
+          <!-- Simple kawaii SVG face -->
+          <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <defs>
+              <radialGradient id="g" cx="50%" cy="30%">
+                <stop offset="0%" stop-color="#fff" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#ffd6e8" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <circle cx="60" cy="60" r="56" fill="url(#g)" stroke="rgba(0,0,0,0.06)"/>
+            <g fill="#111">
+              <ellipse cx="42" cy="62" rx="8" ry="9" fill="#2b2b2b" />
+              <ellipse cx="78" cy="62" rx="8" ry="9" fill="#2b2b2b" />
+            </g>
+            <path d="M40 82 Q60 92 80 82" stroke="#b33" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <circle cx="52" cy="54" r="2.2" fill="#fff"/>
+            <circle cx="88" cy="54" r="2.2" fill="#fff"/>
+          </svg>
+        </div>
+        <div style="flex:1">
+          <h3 style="margin:0 0 6px 0">Kawaii Player</h3>
+          <p style="margin:0;opacity:0.8">Player with animated character, glass UI and playlist. Drag audio files to add.</p>
+        </div>
+      </div>
+
+      <div class="player">
+        <div class="cover" id="cover">Now playing</div>
+
+        <div class="controls">
+          <button class="btn" id="prev" aria-label="Previous track">⏮</button>
+          <button class="btn big" id="play" aria-label="Play or pause" aria-pressed="false">▶</button>
+          <button class="btn" id="next" aria-label="Next track">⏭</button>
+          <div style="flex:1"></div>
+          <input id="fileAdd" type="file" accept="audio/*" style="display:none" multiple>
+          <button class="btn" id="addLocal" aria-controls="playlist">＋ Add</button>
+        </div>
+
+        <!-- Spotify import / embed -->
+        <div style="margin-top:8px;display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;gap:8px;align-items:center">
+            <input id="spotifyUrl" placeholder="Spotify playlist URL or ID" style="flex:1;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit">
+            <button class="btn" id="spotifyImport">Import</button>
+            <button class="btn" id="spotifyEmbed">Embed</button>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <input id="spotifyToken" placeholder="Spotify access token (optional for import)" type="password" style="flex:1;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit">
+            <div style="opacity:0.8;font-size:12px">(Token needed to import previews; you can embed without it)</div>
+          </div>
+          <div id="spotifyStatus" style="font-size:13px;opacity:0.9" aria-live="polite"></div>
+          <div id="spotifyEmbedContainer" style="margin-top:8px"></div>
+        </div>
+
+        <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Playback progress">
+          <i id="progressBar"></i>
+        </div>
+
+        <div style="display:flex;gap:12px;align-items:center">
+          <div id="time">0:00 / 0:00</div>
+          <div style="flex:1"></div>
+          <input type="range" id="volume" min="0" max="1" step="0.01" value="0.8">
+        </div>
+
+        <div class="playlist" id="playlist" role="list" aria-label="Playlist" tabindex="0"></div>
+      </div>
+    </section>
+
+    <section class="card right">
+      <div class="calc">
+        <div class="display" id="calcDisplay">0</div>
+        <div class="pad" id="pad">
+          <div class="key" data-val="7">7</div>
+          <div class="key" data-val="8">8</div>
+          <div class="key" data-val="9">9</div>
+          <div class="key" data-op="/">÷</div>
+          <div class="key" data-val="4">4</div>
+          <div class="key" data-val="5">5</div>
+          <div class="key" data-val="6">6</div>
+          <div class="key" data-op="*">×</div>
+          <div class="key" data-val="1">1</div>
+          <div class="key" data-val="2">2</div>
+          <div class="key" data-val="3">3</div>
+          <div class="key" data-op="-">−</div>
+          <div class="key" data-val="0">0</div>
+          <div class="key" data-val=".">.</div>
+          <div class="key" id="equals">=</div>
+          <div class="key" data-op="+">+</div>
+          <div class="key" id="clear" style="grid-column:span 2;">C</div>
+          <div class="key" id="del" style="grid-column:span 2;">DEL</div>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;">
+        <h4 style="margin:6px 0">Tips</h4>
+        <ul style="margin-top:6px">
+          <li>Click Add to import local audio files or drag files onto the playlist area.</li>
+          <li>Use the calculator for quick calculations while music plays.</li>
+          <li>Open this file in a modern browser for full effects (backdrop-filter supported in Chrome/Edge/Safari).</li>
+        </ul>
+      </div>
+
+      <footer>Made with CSS glass, simple SVG character and vanilla JS — single file SPA.</footer>
+    </section>
+  </main>
+
+  <audio id="audio" preload="metadata"></audio>
+
+  <script>
+  // ====== Music player logic ======
+  const audio = document.getElementById('audio');
+  const playBtn = document.getElementById('play');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const progressBar = document.getElementById('progressBar');
+  const progressContainer = document.querySelector('.progress');
+  const timeLabel = document.getElementById('time');
+  const volume = document.getElementById('volume');
+  const playlistEl = document.getElementById('playlist');
+  const cover = document.getElementById('cover');
+  const fileAdd = document.getElementById('fileAdd');
+  const addLocal = document.getElementById('addLocal');
+  const spotifyUrlInput = document.getElementById('spotifyUrl');
+  const spotifyEmbedBtn = document.getElementById('spotifyEmbed');
+  const spotifyStatus = document.getElementById('spotifyStatus');
+  const spotifyEmbedContainer = document.getElementById('spotifyEmbedContainer');
+  // track blob URLs created from local files so we can revoke them on unload
+  const localBlobUrls = [];
+
+    // sample online playlist (royalty-free sample songs)
+    const playlist = [
+      {title:'SoundHelix Song 1', src:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'},
+      {title:'SoundHelix Song 2', src:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3'},
+      {title:'SoundHelix Song 3', src:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3'}
+    ];
+
+    let current = 0;
+    let updatingProgress = false;
+
+    function renderPlaylist(){
+      playlistEl.innerHTML = '';
+      playlist.forEach((t,i)=>{
+        const el = document.createElement('div');
+        el.className = 'track' + (i===current?' active':'');
+        el.setAttribute('role','listitem');
+        el.tabIndex = 0; // keyboard focusable
+        el.innerHTML = `<div style="flex:1">${t.title}</div><div style="opacity:0.8">${t.src && t.src.startsWith && t.src.startsWith('blob:')? 'Local': 'URL'}</div>`;
+        el.addEventListener('click', ()=>{ loadTrack(i); playAudio(); });
+        el.addEventListener('keydown', (ev)=>{ if(ev.key==='Enter' || ev.key===' ') { ev.preventDefault(); loadTrack(i); playAudio(); } });
+        playlistEl.appendChild(el);
+      });
+    }
+
+    function loadTrack(i){
+      if(i<0) i = playlist.length-1;
+      if(i>=playlist.length) i = 0;
+      current = i;
+      audio.src = playlist[current].src;
+      cover.textContent = playlist[current].title;
+      renderPlaylist();
+    }
+
+    function playAudio(){
+      const p = audio.play();
+      // Some browsers block autoplay; handle promise rejection silently
+      if(p && p.catch) p.catch(()=>{});
+      playBtn.textContent = '⏸';
+      playBtn.setAttribute('aria-pressed','true');
+    }
+    function pauseAudio(){
+      audio.pause(); playBtn.textContent = '▶';
+      playBtn.setAttribute('aria-pressed','false');
+    }
+
+    playBtn.addEventListener('click', ()=>{
+      if(audio.paused) playAudio(); else pauseAudio();
+    });
+    prevBtn.addEventListener('click', ()=>{ loadTrack(current-1); playAudio(); });
+    nextBtn.addEventListener('click', ()=>{ loadTrack(current+1); playAudio(); });
+
+    audio.addEventListener('timeupdate', ()=>{
+      if(!audio.duration) return;
+      const pct = (audio.currentTime / audio.duration) * 100;
+      progressBar.style.width = pct + '%';
+      timeLabel.textContent = formatTime(audio.currentTime) + ' / ' + formatTime(audio.duration);
+      // update accessible progress value
+      if(progressContainer) progressContainer.setAttribute('aria-valuenow', String(Math.floor(pct)));
+    });
+
+    audio.addEventListener('ended', ()=>{ loadTrack(current+1); playAudio(); });
+
+    document.querySelector('.progress').addEventListener('click', (e)=>{
+      if(!audio.duration) return;
+      const rect = e.currentTarget.getBoundingClientRect();
+      const x = e.clientX - rect.left; const pct = x / rect.width;
+      audio.currentTime = pct * audio.duration;
+    });
+
+    volume.addEventListener('input', ()=>{ audio.volume = volume.value; });
+
+    function formatTime(s){
+      if(!s || isNaN(s)) return '0:00';
+      const m = Math.floor(s/60); const sec = Math.floor(s%60).toString().padStart(2,'0'); return `${m}:${sec}`;
+    }
+
+    // Add local files
+    addLocal.addEventListener('click', ()=>fileAdd.click());
+    fileAdd.addEventListener('change', (ev)=>{
+      const files = Array.from(ev.target.files);
+      files.forEach(f=>{
+        const url = URL.createObjectURL(f);
+        localBlobUrls.push(url);
+        playlist.push({title: f.name, src: url});
+      });
+      renderPlaylist();
+      if(!audio.src) loadTrack(0);
+    });
+
+    // drag-and-drop onto playlist
+    playlistEl.addEventListener('dragover', e=>{ e.preventDefault(); playlistEl.style.opacity=0.9; });
+    playlistEl.addEventListener('dragleave', e=>{ playlistEl.style.opacity=''; });
+    playlistEl.addEventListener('drop', e=>{
+      e.preventDefault(); playlistEl.style.opacity='';
+      const items = Array.from(e.dataTransfer.files || []);
+      items.forEach(f=>{ if(f.type.startsWith('audio/')){ const url = URL.createObjectURL(f); localBlobUrls.push(url); playlist.push({title:f.name, src:url}); }});
+      renderPlaylist();
+    });
+
+    // init
+    loadTrack(0);
+
+    // ====== Spotify embed (no token required) ======
+    // Accepts full playlist URLs (https://open.spotify.com/playlist/ID?...) or spotify:playlist:ID
+    spotifyEmbedBtn.addEventListener('click', ()=>{
+      const val = (spotifyUrlInput.value || '').trim();
+      // toggle: if already embedded, remove
+      if(spotifyEmbedContainer.innerHTML.trim()){ spotifyEmbedContainer.innerHTML = ''; spotifyEmbedBtn.textContent = 'Embed'; spotifyStatus.textContent = ''; return; }
+      if(!val){ spotifyStatus.textContent = 'Paste a Spotify playlist URL or ID first.'; return; }
+      const m = val.match(/playlist\/([A-Za-z0-9]+)(?:\?|$)/) || val.match(/spotify:playlist:([A-Za-z0-9]+)/);
+      if(!m){ spotifyStatus.textContent = 'Could not parse a playlist ID from that value.'; return; }
+      const id = m[1];
+      const embedUrl = 'https://open.spotify.com/embed/playlist/' + id;
+      // pause local audio to avoid multiple audio sources
+      try{ audio.pause(); playBtn.textContent = '▶'; playBtn.setAttribute('aria-pressed','false'); }catch(e){}
+      // create iframe (user will interact with it to play)
+  // create responsive wrapper and iframe
+  const wrap = document.createElement('div'); wrap.className = 'embed-wrap';
+  const iframe = document.createElement('iframe');
+  iframe.src = embedUrl;
+  iframe.setAttribute('allow', 'encrypted-media');
+  iframe.title = 'Spotify playlist';
+  wrap.appendChild(iframe);
+  spotifyEmbedContainer.appendChild(wrap);
+      spotifyStatus.textContent = 'Embedded playlist — use the Spotify player above to play. No token required.';
+      spotifyEmbedBtn.textContent = 'Remove embed';
+    });
+
+  // Revoke any created blob URLs when leaving the page to avoid leaking memory
+  window.addEventListener('beforeunload', ()=>{ try{ localBlobUrls.forEach(u=>URL.revokeObjectURL(u)); }catch(e){} });
+
+    // ====== Calculator logic ======
+    const calcDisplay = document.getElementById('calcDisplay');
+    const pad = document.getElementById('pad');
+    let expr = '';
+
+    pad.addEventListener('click', (e)=>{
+      const key = e.target.closest('.key'); if(!key) return;
+      const v = key.dataset.val; const op = key.dataset.op;
+      if(v!==undefined){
+        if(expr==='0') expr = v; else expr += v;
+      } else if(op){
+        expr += op;
+      } else if(key.id==='equals'){
+        calculate();
+      } else if(key.id==='clear'){
+        expr = '';
+      } else if(key.id==='del'){
+        expr = expr.slice(0,-1);
+      }
+      calcDisplay.textContent = expr || '0';
+    });
+
+    function calculate(){
+      if(!expr) return;
+      // safe-ish evaluation: allow only digits, ops, dot, parentheses
+      if(!/^[0-9+\-*/().\s]+$/.test(expr)) { calcDisplay.textContent = 'Err'; expr=''; return; }
+      try{ const res = Function('return ('+expr+')')(); expr = String(Number.isFinite(res)? res : ''); calcDisplay.textContent = expr || '0'; }
+      catch(e){ calcDisplay.textContent='Err'; expr=''; }
+    }
+
+    // keyboard support for calculator and playback
+    window.addEventListener('keydown', (e)=>{
+      // Space toggles playback regardless of focused element
+      if(e.key === ' '){ e.preventDefault(); if(audio.paused) playAudio(); else pauseAudio(); return; }
+
+      // If the user is typing into an input/textarea, don't hijack keys for the calculator
+      const ae = document.activeElement && document.activeElement.tagName;
+      if(ae === 'INPUT' || ae === 'TEXTAREA') return;
+
+      if(/\d|\.|\+|\-|\*|\//.test(e.key)){ expr += e.key; calcDisplay.textContent = expr; }
+      if(e.key === 'Enter'){ calculate(); }
+      if(e.key === 'Backspace'){ expr = expr.slice(0,-1); calcDisplay.textContent = expr || '0'; }
+    });
+
+    // accessibility: show focus styles when keyboard used
+    document.addEventListener('keydown', ()=> document.body.classList.add('kbd'));
+
+  </script>
+</body>
+</html>
