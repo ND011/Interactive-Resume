@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dhruv Vasava | Interactive Resume</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Google Fonts for Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <header id="header">
+      <nav class="navbar">
+        <div class="logo">Dhruv.V</div>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#references">References</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <h1>Hello, I'm <span class="highlight">Dhruv Vasava</span></h1>
+        <h2>Aspiring AI & Machine Learning Engineer</h2>
+        <p>
+          Building intelligent systems and interactive web experiences with
+          passion and code.
+        </p>
+
+        <div class="social-buttons-container">
+          <a
+            href="https://github.com/ND011"
+            target="_blank"
+            class="social-btn github"
+          >
+            <i class="fab fa-github"></i> GitHub
+          </a>
+          <a
+            href="https://www.linkedin.com/in/dhruv-vasava-3422ab2b5"
+            target="_blank"
+            class="social-btn linkedin"
+          >
+            <i class="fab fa-linkedin-in"></i> LinkedIn
+          </a>
+        </div>
+
+        <br />
+        <br />
+        <div class="hero-buttons">
+          <a href="#projects" class="btn">View My Work</a>
+          <a href="assets/Dhruv_Resume.pdf" download class="btn btn-secondary"
+            >Download Resume <i class="fas fa-download"></i
+          ></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+      <div class="container">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+          <div class="about-text">
+            <p>
+              Aspiring AI and Machine Learning Engineer with a strong foundation
+              in Deep Learning, Natural Language Processing, and Computer
+              Vision. Experienced in building end-to-end AI systems, including
+              self-trained models, offline large language models, and
+              multi-modal AI pipelines. Values clear communication and
+              structured execution, with a commitment to delivering reliable,
+              high-quality solutions.
+            </p>
+            <div class="info-grid">
+              <div class="info-item">
+                <strong>Degree:</strong> BSc IT (Specialization: AI)
+              </div>
+              <div class="info-item">
+                <strong>University:</strong> AURO University, Surat
+              </div>
+              <div class="info-item">
+                <strong>Email:</strong> dhruvvasava1234@gmail.com
+              </div>
+              <!-- Phone number removed by user request -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section bg-light">
+      <div class="container">
+        <h2 class="section-title">Technical Skills</h2>
+
+        <!-- Categorized Skills Cards -->
+        <div
+          class="skills-grid"
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+          "
+        >
+          <!-- Category 1: AI & ML -->
+          <div
+            class="skill-category-card"
+            style="
+              background: white;
+              padding: 2rem;
+              border-radius: 12px;
+              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            "
+          >
+            <h3
+              style="
+                color: var(--primary-color);
+                margin-bottom: 1.5rem;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+              "
+            >
+              <i class="fas fa-brain"></i> AI & Machine Learning
+            </h3>
+            <ul style="list-style: none; padding: 0">
+              <li
+                style="
+                  margin-bottom: 10px;
+                  padding-left: 20px;
+                  position: relative;
+                "
+              >
+                <i
+                  class="fas fa-check"
+                  style="
+                    position: absolute;
+                    left: 0;
+                    top: 4px;
+                    color: var(--primary-color);
+                    font-size: 0.8rem;
+                  "
+                ></i>
+                Machine Learning / Deep Learning
+              </li>
+              <li
+                style="
+                  margin-bottom: 10px;
+                  padding-left: 20px;
+                  position: relative;
+                "
+              >
+                <i
+                  class="fas fa-check"
+                  style="
+                    position: absolute;
+                    left: 0;
+                    top: 4px;
+                    color: var(--primary-color);
+                    font-size: 0.8rem;
+                  "
+                ></i>
+                TensorFlow / PyTorch
+              </li>
+              <li
+                style="
+                  margin-bottom: 10px;
+                  padding-left: 20px;
+                  position: relative;
+                "
+              >
+                <i
+                  class="fas fa-check"
+                  style="
+                    position: absolute;
+                    left: 0;
+                    top: 4px;
+                    color: var(--primary-color);
+                    font-size: 0.8rem;
+                  "
+                ></i>
+                Computer Vision (OpenCV)
+              </li>
+              <li
+                style="
+                  margin-bottom: 10px;
+                  padding-left: 20px;
+                  position: relative;
+                "
+              >
+                <i
+                  class="fas fa-check"
+                  style="
+                    position: absolute;
+                    left: 0;
+                    top: 4px;
+                    color: var(--primary-color);
+                    font-size: 0.8rem;
+                  "
+                ></i>
+                NLP & Transformers (BERT/BART)
+              </li>
+              <li
+                style="
+                  margin-bottom: 10px;
+                  padding-left: 20px;
+                  position: relative;
+                "
+              >
+                <i
+                  class="fas fa-check"
+                  style="
+                    position: absolute;
+                    left: 0;
+                    top: 4px;
+                    color: var(--primary-color);
+                    font-size: 0.8rem;
+                  "
+                ></i>
+                Custom Model Training
+              </li>
+            </ul>
+          </div>
+
+          <!-- Category 2: Programming Languages -->
+          <div
+            class="skill-category-card"
+            style="
+              background: white;
+              padding: 2rem;
+              border-radius: 12px;
+              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            "
+          >
+            <h3
+              style="
+                color: var(--primary-color);
+                margin-bottom: 1.5rem;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+              "
+            >
+              <i class="fas fa-code"></i> Languages & Core
+            </h3>
+            <ul style="list-style: none; padding: 0">
+              <li
+                style="
+                  margin-bottom: 10px;
+                  padding-left: 20px;
+                  position: relative;
+                "
+              >
+                <i
+                  class="fas fa-check"
+                  style="
+                    position: absolute;
+                    left: 0;
+                    top: 4px;
+                    color: var(--primary-color);
+                    font-size: 0.8rem;
+                  "
+                ></i>
+                Python (Expert)
+              </li>
+              <li
+                style="
+                  margin-bottom: 10px;
+                  padding-left: 20px;
+                  position: relative;
+                "
+              >
+                <i
+                  class="fas fa-check"
+                  style="
+                    position: absolute;
+                    left: 0;
+                    top: 4px;
+                    color: var(--primary-color);
+                    font-size: 0.8rem;
+                  "
+                ></i>
+                C / C++ & DSA
+              </li>
+              <li
+                style="
+                  margin-bottom: 10px;
+                  padding-left: 20px;
+                  position: relative;
+                "
+              >
+                <i
+                  class="fas fa-check"
+                  style="
+                    position: absolute;
+                    left: 0;
+                    top: 4px;
+                    color: var(--primary-color);
+                    font-size: 0.8rem;
+                  "
+                ></i>
+                Java (OOP)
+              </li>
+              <li
+                style="
+                  margin-bottom: 10px;
+                  padding-left: 20px;
+                  position: relative;
+                "
+              >
+                <i
+                  class="fas fa-check"
+                  style="
+                    position: absolute;
+                    left: 0;
+                    top: 4px;
+                    color: var(--primary-color);
+                    font-size: 0.8rem;
+                  "
+                ></i>
+                SQL / Database Management
+              </li>
+              <li
+                style="
+                  margin-bottom: 10px;
+                  padding-left: 20px;
+                  position: relative;
+                "
+              >
+                <i
+                  class="fas fa-check"
+                  style="
+                    position: absolute;
+                    left: 0;
+                    top: 4px;
+                    color: var(--primary-color);
+                    font-size: 0.8rem;
+                  "
+                ></i>
+                JavaScript (ES6+)
+              </li>
+            </ul>
+          </div>
+
+          <!-- Category 3: Web & Blockchain -->
+          <div
+            class="skill-category-card"
+            style="
+              background: white;
+              padding: 2rem;
+              border-radius: 12px;
+              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            "
+          >
+            <h3
+              style="
+                color: var(--primary-color);
+                margin-bottom: 1.5rem;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+              "
+            >
+              <i class="fas fa-globe"></i> Web & Blockchain
+            </h3>
+            <ul style="list-style: none; padding: 0">
+              <li
+                style="
+                  margin-bottom: 10px;
+                  padding-left: 20px;
+                  position: relative;
+                "
+              >
+                <i
+                  class="fas fa-check"
+                  style="
+                    position: absolute;
+                    left: 0;
+                    top: 4px;
+                    color: var(--primary-color);
+                    font-size: 0.8rem;
+                  "
+                ></i>
+                React.js / Node.js
+              </li>
+              <li
+                style="
+                  margin-bottom: 10px;
+                  padding-left: 20px;
+                  position: relative;
+                "
+              >
+                <i
+                  class="fas fa-check"
+                  style="
+                    position: absolute;
+                    left: 0;
+                    top: 4px;
+                    color: var(--primary-color);
+                    font-size: 0.8rem;
+                  "
+                ></i>
+                Flask / Django
+              </li>
+              <li
+                style="
+                  margin-bottom: 10px;
+                  padding-left: 20px;
+                  position: relative;
+                "
+              >
+                <i
+                  class="fas fa-check"
+                  style="
+                    position: absolute;
+                    left: 0;
+                    top: 4px;
+                    color: var(--primary-color);
+                    font-size: 0.8rem;
+                  "
+                ></i>
+                HTML5 / CSS3
+              </li>
+              <li
+                style="
+                  margin-bottom: 10px;
+                  padding-left: 20px;
+                  position: relative;
+                "
+              >
+                <i
+                  class="fas fa-check"
+                  style="
+                    position: absolute;
+                    left: 0;
+                    top: 4px;
+                    color: var(--primary-color);
+                    font-size: 0.8rem;
+                  "
+                ></i>
+                Ethereum / Solidity / Web3
+              </li>
+            </ul>
+          </div>
+
+          <!-- Category 4: Soft Skills -->
+          <div
+            class="skill-category-card"
+            style="
+              background: white;
+              padding: 2rem;
+              border-radius: 12px;
+              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            "
+          >
+            <h3
+              style="
+                color: var(--primary-color);
+                margin-bottom: 1.5rem;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+              "
+            >
+              <i class="fas fa-users"></i> Soft Skills
+            </h3>
+            <ul style="list-style: none; padding: 0">
+              <li
+                style="
+                  margin-bottom: 10px;
+                  padding-left: 20px;
+                  position: relative;
+                "
+              >
+                <i
+                  class="fas fa-star"
+                  style="
+                    position: absolute;
+                    left: 0;
+                    top: 4px;
+                    color: #fbbf24;
+                    font-size: 0.8rem;
+                  "
+                ></i>
+                Analytical Thinking
+              </li>
+              <li
+                style="
+                  margin-bottom: 10px;
+                  padding-left: 20px;
+                  position: relative;
+                "
+              >
+                <i
+                  class="fas fa-star"
+                  style="
+                    position: absolute;
+                    left: 0;
+                    top: 4px;
+                    color: #fbbf24;
+                    font-size: 0.8rem;
+                  "
+                ></i>
+                Problem Solving
+              </li>
+              <li
+                style="
+                  margin-bottom: 10px;
+                  padding-left: 20px;
+                  position: relative;
+                "
+              >
+                <i
+                  class="fas fa-star"
+                  style="
+                    position: absolute;
+                    left: 0;
+                    top: 4px;
+                    color: #fbbf24;
+                    font-size: 0.8rem;
+                  "
+                ></i>
+                Clear Communication
+              </li>
+              <li
+                style="
+                  margin-bottom: 10px;
+                  padding-left: 20px;
+                  position: relative;
+                "
+              >
+                <i
+                  class="fas fa-star"
+                  style="
+                    position: absolute;
+                    left: 0;
+                    top: 4px;
+                    color: #fbbf24;
+                    font-size: 0.8rem;
+                  "
+                ></i>
+                Team Collaboration
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Languages Spoken -->
+        <div class="languages" style="margin-top: 3rem; text-align: center">
+          <h4 style="margin-bottom: 15px; font-size: 1.2rem">
+            🗣️ Languages Spoken
+          </h4>
+          <div
+            style="
+              display: flex;
+              justify-content: center;
+              gap: 15px;
+              flex-wrap: wrap;
+            "
+          >
+            <span
+              style="
+                background: white;
+                padding: 8px 16px;
+                border-radius: 20px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+              "
+              >English</span
+            >
+            <span
+              style="
+                background: white;
+                padding: 8px 16px;
+                border-radius: 20px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+              "
+              >Hindi</span
+            >
+            <span
+              style="
+                background: white;
+                padding: 8px 16px;
+                border-radius: 20px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+              "
+              >Gujarati</span
+            >
+            <span
+              style="
+                background: white;
+                padding: 8px 16px;
+                border-radius: 20px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+              "
+              >Marathi</span
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Internship & Projects Section -->
+    <section id="projects" class="section">
+      <div class="container">
+        <h2 class="section-title">Projects</h2>
+
+        <!-- Mandatory Internship Project -->
+        <h3
+          class="category-title"
+          style="margin-bottom: 20px; color: var(--primary-color)"
+        >
+          Internship Training Project
+        </h3>
+        <div class="projects-grid" style="margin-bottom: 40px">
+          <div
+            class="project-card"
+            style="border: 2px solid var(--primary-color)"
+          >
+            <div class="card-content">
+              <h3>Interactive Resume Website</h3>
+              <span
+                class="badge"
+                style="background-color: var(--primary-color); color: white"
+                >Internship Training Project</span
+              >
+              <p>
+                Designed and developed an interactive resume website using HTML,
+                CSS, and JavaScript as part of internship training, featuring
+                animated skill visualization, smooth navigation, and structured
+                project presentation.
+              </p>
+              <div class="tech-stack">
+                <span>HTML5</span>
+                <span>CSS3</span>
+                <span>JavaScript</span>
+              </div>
+              <a
+                href="#"
+                class="link-btn"
+                style="pointer-events: none; color: #aaa"
+                >Currently Viewing</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- AI / ML / DL -->
+        <h3
+          class="category-title"
+          style="margin-bottom: 20px; color: var(--text-dark)"
+        >
+          Artificial Intelligence / Machine Learning / Deep Learning
+        </h3>
+        <div class="projects-grid" style="margin-bottom: 40px">
+          <div class="project-card">
+            <div class="card-content">
+              <h3>Insta Analytic</h3>
+              <span class="badge">Computer Vision</span>
+              <p>
+                Developed an AI-powered system for image analysis and
+                information extraction using self-trained deep learning
+                classification models (CNN). Designed and trained custom models
+                from scratch, handling dataset preparation, data labeling,
+                preprocessing, augmentation, training, validation, and
+                evaluation. Applied computer vision techniques for accurate
+                image understanding and feature extraction.
+              </p>
+              <div class="tech-stack">
+                <span>Deep Learning</span>
+                <span>CNN</span>
+                <span>Python</span>
+              </div>
+              <a
+                href="https://github.com/ND011"
+                class="link-btn"
+                target="_blank"
+                >View Code</a
+              >
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="card-content">
+              <h3>Computer Vision Project</h3>
+              <span class="badge">Computer Vision</span>
+              <p>
+                Developed a computer vision system using self-trained CNN models
+                to perform object detection and classification, specifically
+                detecting humans, fans, and lights. Implemented image
+                preprocessing, feature extraction, and model optimization to
+                improve inference accuracy and performance.
+              </p>
+              <div class="tech-stack">
+                <span>Computer Vision</span>
+                <span>CNN</span>
+                <span>Python</span>
+              </div>
+              <a
+                href="https://github.com/ND011"
+                class="link-btn"
+                target="_blank"
+                >View Code</a
+              >
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="card-content">
+              <h3>Fake News Detection System</h3>
+              <span class="badge">NLP</span>
+              <p>
+                NLP-based news classification system using Transformer models
+                (BERT, BART, and T5). Included text preprocessing, tokenization,
+                and evaluation using standard classification metrics.
+              </p>
+              <div class="tech-stack">
+                <span>Transformers</span>
+                <span>NLP</span>
+                <span>BERT/BART</span>
+              </div>
+              <a
+                href="https://github.com/ND011"
+                class="link-btn"
+                target="_blank"
+                >View Code</a
+              >
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="card-content">
+              <h3>Multi-Modal AI Processing System</h3>
+              <span class="badge">AI Pipeline</span>
+              <p>
+                Unified AI pipeline capable of processing text, images, audio,
+                and tabular data, supporting text summarization, image OCR, and
+                CSV analysis.
+              </p>
+              <div class="tech-stack">
+                <span>Multi-Modal</span>
+                <span>OCR</span>
+                <span>Audio</span>
+              </div>
+              <a
+                href="https://github.com/ND011"
+                class="link-btn"
+                target="_blank"
+                >View Code</a
+              >
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="card-content">
+              <h3>Resume Keyword Extractor</h3>
+              <span class="badge">NLP</span>
+              <p>
+                NLP-based tool to extract key skills and keywords from resumes
+                for ATS optimization.
+              </p>
+              <div class="tech-stack">
+                <span>NLP</span>
+                <span>Python</span>
+                <span>Regex</span>
+              </div>
+              <a
+                href="https://github.com/ND011"
+                class="link-btn"
+                target="_blank"
+                >View Code</a
+              >
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="card-content">
+              <h3>Article Summarizer</h3>
+              <span class="badge">NLP</span>
+              <p>
+                Automatic text summarization system using transformer-based NLP
+                models.
+              </p>
+              <div class="tech-stack">
+                <span>Transformers</span>
+                <span>NLP</span>
+                <span>Python</span>
+              </div>
+              <a
+                href="https://github.com/ND011"
+                class="link-btn"
+                target="_blank"
+                >View Code</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Tools / Assistants -->
+        <h3
+          class="category-title"
+          style="margin-bottom: 20px; color: var(--text-dark)"
+        >
+          AI Tools / Assistants
+        </h3>
+        <div class="projects-grid" style="margin-bottom: 40px">
+          <div class="project-card">
+            <div class="card-content">
+              <h3>Tina AI</h3>
+              <span class="badge">LLM Assistant</span>
+              <p>
+                Self-created offline AI coding assistant built using Ollama and
+                the Qwen-3.4B large language model, supporting offline code
+                generation, debugging, and explanations with a privacy-focused
+                approach.
+              </p>
+              <div class="tech-stack">
+                <span>Ollama</span>
+                <span>Qwen-3.4B</span>
+                <span>Python</span>
+              </div>
+              <a
+                href="https://github.com/ND011"
+                class="link-btn"
+                target="_blank"
+                >View Code</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Web Development -->
+        <h3
+          class="category-title"
+          style="margin-bottom: 20px; color: var(--text-dark)"
+        >
+          Web Development Projects
+        </h3>
+        <div class="projects-grid" style="margin-bottom: 40px">
+          <div class="project-card">
+            <div class="card-content">
+              <h3>R Anime</h3>
+              <span class="badge">Web App</span>
+              <p>
+                OTT-style anime streaming web platform developed using React,
+                HTML, CSS, and JavaScript, focusing on responsive UI and
+                component-based design.
+              </p>
+              <div class="tech-stack">
+                <span>React.js</span>
+                <span>HTML5/CSS3</span>
+              </div>
+              <a
+                href="https://github.com/ND011"
+                class="link-btn"
+                target="_blank"
+                >View Code</a
+              >
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="card-content">
+              <h3>Fitness Tracker Web Application</h3>
+              <span class="badge">Web App</span>
+              <p>
+                Web application for tracking fitness-related data and user
+                activity.
+              </p>
+              <div class="tech-stack">
+                <span>JavaScript</span>
+                <span>HTML/CSS</span>
+              </div>
+              <a
+                href="https://github.com/ND011"
+                class="link-btn"
+                target="_blank"
+                >View Code</a
+              >
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="card-content">
+              <h3>Technologia 2025 Event Website</h3>
+              <span class="badge">Web App</span>
+              <p>
+                Official college tech-fest website with event information and
+                registration functionality built using React and Node.js.
+              </p>
+              <div class="tech-stack">
+                <span>React.js</span>
+                <span>Node.js</span>
+              </div>
+              <a
+                href="https://github.com/ND011"
+                class="link-btn"
+                target="_blank"
+                >View Code</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Desktop / Software Applications -->
+        <h3
+          class="category-title"
+          style="margin-bottom: 20px; color: var(--text-dark)"
+        >
+          Desktop / Software Applications
+        </h3>
+        <div class="projects-grid" style="margin-bottom: 40px">
+          <div class="project-card">
+            <div class="card-content">
+              <h3>Typing Practice Application</h3>
+              <span class="badge">Desktop App</span>
+              <p>
+                Python-based desktop application featuring WPM calculation,
+                accuracy tracking, difficulty levels, and progress monitoring.
+              </p>
+              <div class="tech-stack">
+                <span>Python</span>
+                <span>Tkinter</span>
+              </div>
+              <a
+                href="https://github.com/ND011"
+                class="link-btn"
+                target="_blank"
+                >View Code</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Blockchain / Web3 Projects -->
+        <h3
+          class="category-title"
+          style="margin-bottom: 20px; color: var(--text-dark)"
+        >
+          Blockchain / Web3 Projects
+        </h3>
+        <div class="projects-grid" style="margin-bottom: 40px">
+          <div class="project-card">
+            <div class="card-content">
+              <h3>DogChain</h3>
+              <span class="badge">Blockchain</span>
+              <p>
+                Blockchain-based freelance marketplace using Ethereum and
+                Solidity, implementing smart contracts and escrow-style payment
+                handling.
+              </p>
+              <div class="tech-stack">
+                <span>Ethereum</span>
+                <span>Solidity</span>
+                <span>Web3</span>
+              </div>
+              <a
+                href="https://github.com/ND011"
+                class="link-btn"
+                target="_blank"
+                >View Code</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Core CS -->
+        <h3
+          class="category-title"
+          style="margin-bottom: 20px; color: var(--text-dark)"
+        >
+          Core Computer Science Projects
+        </h3>
+        <div class="projects-grid" style="margin-bottom: 40px">
+          <div class="project-card">
+            <div class="card-content">
+              <h3>Library Management System</h3>
+              <span class="badge">Core CS</span>
+              <p>
+                Java-based application using OOP principles and SQL for managing
+                library operations.
+              </p>
+              <div class="tech-stack">
+                <span>Java</span>
+                <span>SQL</span>
+              </div>
+              <a
+                href="https://github.com/ND011"
+                class="link-btn"
+                target="_blank"
+                >View Code</a
+              >
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="card-content">
+              <h3>Data Structures & Algorithms Programs</h3>
+              <span class="badge">Algorithms</span>
+              <p>
+                Multiple implementations in C and C++, including sorting,
+                searching, stacks, queues, trees, and graphs.
+              </p>
+              <div class="tech-stack">
+                <span>C/C++</span>
+                <span>Data Structures</span>
+              </div>
+              <a
+                href="https://github.com/ND011"
+                class="link-btn"
+                target="_blank"
+                >View Code</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Internship Details Section -->
+    <section id="internship" class="section bg-light">
+      <div class="container">
+        <h2 class="section-title">Internship Experience</h2>
+
+        <!-- Uni Mento Internship (Current/Recent) -->
+        <div
+          class="internship-info"
+          style="
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 1.5rem;
+          "
+        >
+          <h3>Web Development Intern</h3>
+          <p class="company">
+            Uni Mento Internship
+            <span
+              style="
+                font-size: 0.9rem;
+                color: #666;
+                font-weight: normal;
+                float: right;
+              "
+              >Current</span
+            >
+          </p>
+          <div class="tech-stack" style="margin: 1rem 0">
+            <span>Frontend Development</span><span>Project Management</span>
+          </div>
+          <ul class="tasks">
+            <li>
+              Developed responsive web pages using HTML, CSS, and JavaScript.
+            </li>
+            <li>
+              Completed training projects including this Interactive Resume.
+            </li>
+            <li>Learned best practices for professional web development.</li>
+          </ul>
+        </div>
+
+        <!-- Diigoo Tech Internship -->
+        <div
+          class="internship-info"
+          style="
+            border-left: 4px solid var(--primary-color);
+            padding-left: 1.5rem;
+          "
+        >
+          <h3 style="color: var(--text-dark)">
+            Blockchain Research & Developer
+          </h3>
+          <p class="company" style="font-size: 1.1rem; font-weight: 600">
+            Diigoo Tech Private Limited
+            <span
+              style="
+                font-size: 0.9rem;
+                color: #666;
+                font-weight: normal;
+                float: right;
+              "
+              >Apr 2025 - July 2025 (Hyderabad)</span
+            >
+          </p>
+          <div class="tech-stack" style="margin: 0.8rem 0">
+            <span>Blockchain</span><span>Smart Contracts</span><span>DApps</span
+            ><span>Strategy</span>
+          </div>
+          <ul class="tasks" style="margin-top: 0.5rem">
+            <li>
+              Completed internship as Blockchain Research & Developer, working
+              closely with core development and strategy teams.
+            </li>
+            <li>
+              Contributed meaningfully to various modules, technical research,
+              and organizational goals aligned with decentralized applications.
+            </li>
+            <li>
+              Demonstrated high professionalism, technical proficiency, and
+              dedication to assigned responsibilities.
+            </li>
+            <li>
+              Exhibited initiative, adaptability, and thorough understanding of
+              theoretical and applied blockchain technology.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- References Section -->
+    <section id="references" class="section">
+      <div class="container">
+        <h2 class="section-title">References</h2>
+        <div class="info-grid">
+          <!-- Reference 1 -->
+          <div class="info-item">
+            <h3 style="color: var(--primary-color); margin-bottom: 0.5rem">
+              Dr. Dhaval Thaker
+            </h3>
+            <p style="font-weight: 600; margin-bottom: 0.2rem">
+              Assistant Professor
+            </p>
+            <p
+              style="
+                color: var(--text-light);
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+              "
+            >
+              School of Information Technology,<br />AURO University, Surat
+            </p>
+
+            <div style="margin-top: 10px; font-size: 0.9rem">
+              <p>📞 +91 92751 91688</p>
+              <p>
+                ✉️
+                <a
+                  href="mailto:dhaval.thaker@aurouniversity.edu.in"
+                  style="color: var(--primary-color)"
+                  >dhaval.thaker@aurouniversity.edu.in</a
+                >
+              </p>
+            </div>
+          </div>
+
+          <!-- Reference 2 -->
+          <div class="info-item">
+            <h3 style="color: var(--primary-color); margin-bottom: 0.5rem">
+              Dr. Papri Das
+            </h3>
+            <p style="font-weight: 600; margin-bottom: 0.2rem">
+              Associate Professor
+            </p>
+            <p
+              style="
+                color: var(--text-light);
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+              "
+            >
+              School of Information Technology,<br />AURO University, Surat
+            </p>
+
+            <div style="margin-top: 10px; font-size: 0.9rem">
+              <p>📞 +91 98253 19849</p>
+              <p>
+                ✉️
+                <a
+                  href="mailto:papri.ghosh@aurouniversity.edu.in"
+                  style="color: var(--primary-color)"
+                  >papri.ghosh@aurouniversity.edu.in</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section bg-light">
+      <div class="container">
+        <h2 class="section-title">Get In Touch</h2>
+        <p class="contact-intro">
+          I'm currently accessible for new opportunities and collaborations.
+        </p>
+
+        <div class="contact-form-container">
+          <form
+            action="mailto:dhruvvasava1234@gmail.com"
+            method="post"
+            enctype="text/plain"
+            class="contact-form"
+          >
+            <div class="form-group">
+              <input type="text" name="name" placeholder="Your Name" required />
+            </div>
+            <div class="form-group">
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <textarea
+                name="message"
+                placeholder="Your Message"
+                rows="5"
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="btn">
+              Send Message <i class="fas fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+
+        <footer class="footer">
+          <p>© 2025 Dhruv Vasava. All Rights Reserved.</p>
+        </footer>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
