@@ -85,4 +85,61 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Contact Form Submission
+    const contactForm = document.getElementById('contactForm');
+    const formStatus = document.getElementById('formStatus');
+    const submitBtn = document.getElementById('submitBtn');
+
+    // PLACEHOLDER: Replace with your actual Web App URL from Google Apps Script
+    // Example: https://script.google.com/macros/s/AKfycbx.../exec
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwyiZg1iJRm5x2mJQqzNztJj9TQAatwda-PZ2u68kzQtl8_0H45rsdFMkY__-B0x_U0/exec'; 
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            
+            // Check if URL is configured
+            if (GOOGLE_SCRIPT_URL === 'INSERT_WEB_APP_URL_HERE' || GOOGLE_SCRIPT_URL === '') {
+                 formStatus.style.display = 'block';
+                 formStatus.style.color = 'red';
+                 formStatus.textContent = 'Error: Script URL not configured. Please see the setup guide.';
+                 return;
+            }
+
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
+            formStatus.style.display = 'none';
+
+            const formData = new FormData(contactForm);
+            // Convert to URL parameters for the GET/POST request (Apps Script handles POST simply)
+            // Or typically we send as application/x-www-form-urlencoded or JSON if the script supports it.
+            // A simple way for Apps Script:
+            
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors', // IMPORTANT: Bypass CORS restrictions
+                body: formData
+            })
+            .then(() => {
+                // In 'no-cors' mode, we cannot read the response status or data. 
+                // We assume if the promise resolves, the request was sent.
+                formStatus.style.display = 'block';
+                formStatus.style.color = 'green';
+                formStatus.textContent = 'Message sent successfully!';
+                contactForm.reset();
+            })
+            .catch(error => {
+                console.error('Error!', error);
+                formStatus.style.display = 'block';
+                formStatus.style.color = 'red';
+                formStatus.textContent = 'Failed to send. Please check your internet or try again.';
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Send Message <i class="fas fa-paper-plane"></i>';
+            });
+        });
+    }
+
 });
